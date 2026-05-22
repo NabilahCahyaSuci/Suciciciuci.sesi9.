@@ -511,24 +511,25 @@ void main() {
 // NIM  : 251410018
 // Kelas : SI2A
 
-// string_extensions.dart
 extension StringCaseExtensions on String {
-  String capitalize() => 'A';
+  String capitalize() {
+    if (isEmpty) return this;
+    return this[0].toUpperCase() + substring(1);
+  }
 }
 
-// text_utils.dart
 extension TextUtilsExtensions on String {
-  String capitalize() => 'B';
+  String capitalize() {
+    return toUpperCase(); // implementasi berbeda
+  }
 }
-
-// main.dart
-import 'string_extensions.dart' as se;
-import 'text_utils.dart' hide capitalize;
 
 void main() {
   var text = 'hello';
 
-  print(se.StringCaseExtensions(text).capitalize());
+  // Panggil eksplisit untuk hindari konflik
+  print(StringCaseExtensions(text).capitalize()); // Hello
+  print(TextUtilsExtensions(text).capitalize());  // HELLO
 }
     </div>
     <button class="btn-popup" onclick="openDartPad('8c3eb85267e67ae6f01a3f1680400af5')">▶ Jalankan Kode di DartPad</button>
